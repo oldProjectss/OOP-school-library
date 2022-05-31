@@ -14,7 +14,8 @@ class Person
   # Create Private method
   private
 
-  def is_of_age?
+  # I renamed this method so it pass the linters check
+  def of_age?
     @age >= 18
   end
 
