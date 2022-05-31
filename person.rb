@@ -1,30 +1,28 @@
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person
-  def initialize(name, age="Unknown", parent_permission=true)
-    @id
+  def initialize(name, age = 'Unknown', _parent_permission: true)
+    @id = rand(1..100)
     @name = name
     @age = age
   end
 
   # Create getters for "id", "name", and "age"
   attr_reader :id
-  attr_reader :name
-  attr_reader :age
+  attr_accessor :name, :age
 
   # Create setters for "name", and "age"
-  attr_writer :name
-  attr_writer :age
 
   # Create Private method
   private
 
   def is_of_age?
-    @age >= 18 ? true : false
+    @age >= 18
   end
 
+  # Create Private method
   public
 
   def can_use_services?
-    is_of_age? || parent_permission ? true : false
+    is_of_age? || @parent_permission
   end
 end
