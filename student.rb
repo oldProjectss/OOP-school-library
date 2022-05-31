@@ -1,9 +1,9 @@
-include './person.rb'
+require './person'
 
 class Student < Person
-  def initialize(classroom)
+  def initialize(classroom, name, age = 'Unknown', parent_permission: true)
     @classroom = classroom
-    super(name, age, _parent_permission)
+    super(name, age, parent_permission)
   end
 
   def play_hooky
