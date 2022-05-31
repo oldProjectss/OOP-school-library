@@ -1,6 +1,6 @@
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person
-  def initialize(name, age = 'Unknown', parent_permission: true)
+  def initialize(age, name = 'Unknown', parent_permission: true)
     @id = rand(1..100)
     @name = name
     @age = age
