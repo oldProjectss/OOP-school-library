@@ -8,6 +8,7 @@ end
 class BaseDecorator < Nameable
   def initialize(nameable)
     @nameable = nameable
+    super()
   end
 
   attr_accessor :nameable
@@ -26,9 +27,9 @@ end
 class TrimmerDecorator < BaseDecorator
   def correct_name
     if @nameable.correct_name.length > 10
-    super.each_char.first(10).join
+      super.each_char.first(10).join
     else
-    super
+      super
     end
   end
 end
@@ -40,6 +41,7 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
+    super()
   end
 
   # Create getters for "id", "name", and "age" & Create setters for "name", and "age"
@@ -65,10 +67,3 @@ class Person < Nameable
     @name
   end
 end
-
-person = Person.new(22, 'maximilianus')
-  person.correct_name
-  capitalizedPerson = CapitalizeDecorator.new(person)
-  capitalizedPerson.correct_name
-  capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-  puts capitalizedTrimmedPerson.correct_name
