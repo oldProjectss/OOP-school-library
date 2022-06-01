@@ -3,7 +3,6 @@ require './rental'
 
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person < Nameable
-
   attr_accessor :name, :age, :rental
   attr_reader :id
 
@@ -37,4 +36,5 @@ class Person < Nameable
 
   def add_rental(book, date)
     Rental.new(book, self, date)
+  end
 end
