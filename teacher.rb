@@ -10,6 +10,3 @@ class Teacher < Person
     true
   end
 end
-
-t = Teacher.new('math', 'Jack', 20, true)
-puts t
