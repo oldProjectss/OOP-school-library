@@ -6,14 +6,8 @@ class Book
     @author = author
     @rental = []
   end
-end
 
-class Rental
-  attr_accessor :book, :person, :date
-
-  def initialize(book, person, date)
-    @book = book
-    @person = person
-    @date = date
+  def add_rental(person, date)
+    Rental.new(self, person, date)
   end
 end

@@ -1,7 +1,12 @@
 require './decorat'
+require './rental'
 
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person < Nameable
+
+  attr_accessor :name, :age, :rental
+  attr_reader :id
+
   def initialize(age, name = 'Unknown', parent_permission: true)
     @id = rand(1..100)
     @name = name
@@ -10,10 +15,6 @@ class Person < Nameable
     @rental = []
     super()
   end
-
-  # Create getters for "id", "name", and "age" & Create setters for "name", and "age"
-  attr_accessor :name, :age
-  attr_reader :id
 
   # Create Private method
   private
@@ -33,4 +34,7 @@ class Person < Nameable
   def correct_name
     @name
   end
+
+  def add_rental(book, date)
+    Rental.new(book, self, date)
 end
