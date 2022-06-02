@@ -1,58 +1,81 @@
-=begin
-    List all books.
-    List all people.
-    Create a person (teacher or student, not a plain Person).
-    Create a book.
-    Create a rental.
-    List all rentals for a given person id.
-=end
+#     List all books.
+#     List all people.
+#     Create a person (teacher or student, not a plain Person).
+#     Create a book.
+#     Create a rental.
+#     List all rentals for a given person id.
 
 require './book'
 require './person'
-require './people'
+require './rental'
+require './classroom'
+require './student'
+require './teacher'
 
-def create_book
-    puts "Enter book title:"
+class App
+  attr_reader :books, :people, :rentals
+
+  def initialize()
+    @books = []
+    @people = []
+    @rentals = []
+  end
+
+  def create_book
+    puts 'Enter book title:'
     title = gets.chomp
-    puts "Enter book author:"
+    puts 'Enter book author:'
     author = gets.chomp
-    Book.new(title, author)
-end
+    new_book = Book.new(title, author)
+    @books.push(new_book)
+  end
 
-def create_person
-    puts "Enter person name:"
+  def create_person
+    puts 'Enter person name:'
     name = gets.chomp
-    puts "Enter person type (teacher/student):"
+    puts 'Enter person type (teacher/student):'
     type = gets.chomp
-    Person.new(name, type)
-end
+    new_person = Person.new(name, type)
+    @people.push(new_person)
+  end
 
-def create_rental
-    puts "Enter person id:"
+  def create_rental
+    puts 'Enter person id:'
     person_id = gets.chomp
-    puts "Enter book id:"
+    puts 'Enter book id:'
     book_id = gets.chomp
-    puts "Enter rental date:"
+    puts 'Enter rental date:'
     date = gets.chomp
-    Rental.new(person_id, book_id, date)
+    new_rental = Rental.new(book_id, person_id, date)
+    @rentals.push(new_rental)
+  end
+
+  def list_books
+    @books.each do |book|
+      puts book.title
+    end
+  end
+
+  def list_people
+    @people.each do |person|
+      puts person.name
+    end
+  end
+
+  def list_rentals
+    puts 'Enter person id:'
+    person_id = gets.chomp
+    @rentals.each do |rental|
+      puts rental.book_id if rental.person_id == person_id
+    end
+  end
 end
 
-def list_books
-    Book.all.each do |book|
-        puts "Book: #{book.title} by #{book.author}"
-    end
-end
-
-def list_people
-    Person.all.each do |person|
-        puts "Person: #{person.name} (#{person.type})"
-    end
-end
-
-def list_rentals(person_id)
-    Rental.all.each do |rental|
-        if rental.person_id == person_id
-            puts "Rental: #{rental.book_id} for #{rental.person_id} on #{rental.date}"
-        end
-    end
-end
+app = App.new
+# app.create_book()
+# app.create_person()
+# app.create_rental()
+# app.list_books()
+app.list_people()
+# list_rentals(1)
+# list_rentals(2)
