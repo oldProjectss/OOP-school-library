@@ -4,7 +4,8 @@ require './rental'
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person < Nameable
   attr_accessor :name, :age, :rental, :id
-  # attr_reader 
+
+  # attr_reader
 
   def initialize(age, name = 'Unknown', parent_permission = true)
     @id = rand(1..100)

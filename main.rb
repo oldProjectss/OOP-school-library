@@ -1,17 +1,17 @@
 require './app'
 
-
 def main
   app = App.new
 
-  options = ['list all books', 'list all people','Create a person', 'Create a book', 'Create a rental', 'List all rentals for a given person id', 'Exit']
+  options = ['list all books', 'list all people', 'Create a person', 'Create a book', 'Create a rental',
+             'List all rentals for a given person id', 'Exit']
 
   def display_options(option_list)
-      puts 'Please choose an option by entering a number:'
-      option_list.each_with_index do |element, index|
-        puts "#{index + 1} - #{element}"
-      end
+    puts 'Please choose an option by entering a number:'
+    option_list.each_with_index do |element, index|
+      puts "#{index + 1} - #{element}"
     end
+  end
 
   loop do
     display_options(options)
@@ -35,8 +35,5 @@ def main
       puts 'Invalid input. Please try again.'
     end
   end
-
-  puts 'Goodbye!'
 end
-
 main

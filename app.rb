@@ -21,25 +21,13 @@ class App
     @rentals = []
   end
 
-  # Create a person (teacher or student, not a plain Person).
-  def create_person
-    puts 'Do you want to create a teacher (1) or a student (2)? [Input 1 or 2]:'
-    type = gets.chomp
-    puts 'Invalid input. Please try again.' if type != '1' || type != '2'
-
-    print 'Age:  '
-    age = gets.chomp
-    print 'Name:  '
-    name = gets.chomp
-
-    # if teacher add specialisation
-    if type == '1'
+  # is teacher or student
+  def teacher_or_student(type)
+    case type
+    when '1'
       print 'Specialisation:  '
       specialisation = gets.chomp
-    end
-
-    # Student permission is true
-    if type == '2'
+    when '2'
       print 'Has parent permission [Y/N]:'
       case gets.chomp
       when 'Y'
@@ -50,11 +38,24 @@ class App
         puts 'Invalid person parent permission. Please try again.'
       end
     end
+  end
+
+  # Create a person (teacher or student, not a plain Person).
+  def create_person
+    puts 'Do you want to create a teacher (1) or a student (2)? [Input 1 or 2]:'
+    type = gets.chomp
+    puts 'Invalid input. Please try again.' if type != '1' || type != '2'
+    print 'Age:  '
+    age = gets.chomp
+    print 'Name:  '
+    name = gets.chomp
+    specialisation, parent_permission = teacher_or_student(type)
+    # teacher_or_student(type)
 
     # Create a teacher or a student
     case type
     when '1'
-      new_person = Teacher.new(specialisation, age, name)
+      new_person = Teacher.new(specialisation, name, age)
     when '2'
       new_person = Student.new(age, name, parent_permission)
     end
@@ -62,7 +63,6 @@ class App
     puts
     # Puts message when person is created successfully
     puts "Person #{new_person.name} created successfully."
-    puts
     puts
   end
 
@@ -120,7 +120,7 @@ class App
     puts 'Rentals:'
     @rentals.each do |rental|
       if rental.person.id == person_id
-      puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author} rented by #{rental.person.name}"
+        puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author} rented by #{rental.person.name}"
       end
     end
     puts
