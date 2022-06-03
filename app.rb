@@ -21,61 +21,104 @@ class App
     @rentals = []
   end
 
+  # Create a person (teacher or student, not a plain Person).
+  def create_person
+    puts 'Do you want to create a teacher (1) or a student (2)? [Input 1 or 2]:'
+    type = gets.chomp
+    puts 'Invalid input. Please try again.' if type != '1' || type != '2'
+
+    print 'Age:  '
+    age = gets.chomp
+    print 'Name:  '
+    name = gets.chomp
+
+    # if teacher add specialisation
+    if type == '1'
+      print 'Specialisation:  '
+      specialisation = gets.chomp
+    end
+
+    # Student permission is true
+    if type == '2'
+      print 'Has parent permission [Y/N]:'
+      case gets.chomp
+      when 'Y'
+        parent_permission = true
+      when 'N'
+        parent_permission = false
+      else
+        puts 'Invalid person parent permission. Please try again.'
+      end
+    end
+
+    # Create a teacher or a student
+    case type
+    when '1'
+      new_person = Teacher.new(specialisation, age, name)
+    when '2'
+      new_person = Student.new(age, name, parent_permission)
+    end
+    @people.push(new_person)
+    puts
+    # Puts message when person is created successfully
+    puts "Person #{new_person.name} created successfully."
+    puts
+    puts
+  end
+
+  # Create a book.
   def create_book
-    puts 'Enter book title:'
+    print 'Title:  '
     title = gets.chomp
-    puts 'Enter book author:'
+    print 'Author:  '
     author = gets.chomp
     new_book = Book.new(title, author)
     @books.push(new_book)
-  end
-
-  def create_person
-    puts 'Enter person name:'
-    name = gets.chomp
-    puts 'Enter person type (teacher/student):'
-    type = gets.chomp
-    new_person = Person.new(name, type)
-    @people.push(new_person)
+    puts
+    # Puts message when book is created successfully
+    puts "Book #{new_book.title} created successfully."
+    puts
+    puts
   end
 
   def create_rental
-    puts 'Enter person id:'
-    person_id = gets.chomp
-    puts 'Enter book id:'
+    puts 'Select a book from the following list by number:'
+    list_books
     book_id = gets.chomp
-    puts 'Enter rental date:'
+    book = @books[book_id.to_i - 1]
+    puts 'Select a person from the following list by number:'
+    list_people
+    person_id = gets.chomp
+    person = @people[person_id.to_i - 1]
+    print 'Date:  '
     date = gets.chomp
-    new_rental = Rental.new(book_id, person_id, date)
+    new_rental = Rental.new(book, person, date)
     @rentals.push(new_rental)
+    puts
+    puts "Rental #{new_rental.person.id} created successfully."
+    puts
+    puts
   end
 
   def list_books
-    @books.each do |book|
-      puts book.title
-    end
+    @books.each_with_index { |book, index| puts "#{index + 1}) Title: \"#{book.title}\", Author: #{book.author}" }
+    puts
   end
 
   def list_people
-    @people.each do |person|
-      puts person.name
+    @people.each_with_index do |person, index|
+      puts "#{index + 1}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
+    puts
   end
 
   def list_rentals
     puts 'Enter person id:'
     person_id = gets.chomp
+    puts 'Rentals:'
     @rentals.each do |rental|
-      puts rental.book_id if rental.person_id == person_id
+      puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author} rented by #{rental.person.name}"
     end
+    puts
   end
 end
-
-app = App.new
-# app.create_book()
-# app.create_person()
-# app.create_rental()
-# app.list_books()
-app.list_people()
-# list_rentals(1)
-# list_rentals(2)
