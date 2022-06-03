@@ -26,14 +26,14 @@ class App
     case type
     when '1'
       print 'Specialisation:  '
-      specialisation = gets.chomp
+      gets.chomp
     when '2'
       print 'Has parent permission [Y/N]:'
       case gets.chomp
       when 'Y'
-        parent_permission = true
+        true
       when 'N'
-        parent_permission = false
+        false
       else
         puts 'Invalid person parent permission. Please try again.'
       end
@@ -50,9 +50,7 @@ class App
     print 'Name:  '
     name = gets.chomp
     specialisation, parent_permission = teacher_or_student(type)
-    # teacher_or_student(type)
 
-    # Create a teacher or a student
     case type
     when '1'
       new_person = Teacher.new(specialisation, name, age)

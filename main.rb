@@ -10,12 +10,7 @@ def menu_items
   puts '7 - Exit'
 end
 
-def input
-  app = App.new
-  option = ''
-  # while option != '7'
-  menu_items
-  option = gets.chomp.to_i
+def self.part_one(app, option)
   case option
   when 1
     app.list_books
@@ -23,6 +18,11 @@ def input
     app.list_people
   when 3
     app.create_person
+  end
+end
+
+def self.part_two(app, option)
+  case option
   when 4
     app.create_book
   when 5
@@ -30,7 +30,17 @@ def input
   when 6
     app.list_rentals
   end
-  # end
+end
+
+def input
+  app = App.new
+  option = ''
+  while option != 7
+    menu_items
+    option = gets.chomp.to_i
+    part_one(app, option)
+    part_two(app, option)
+  end
 end
 
 def main
