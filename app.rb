@@ -93,9 +93,10 @@ class App
     print 'Date:  '
     date = gets.chomp
     new_rental = Rental.new(book, person, date)
+    new_rental.person.id = person_id
     @rentals.push(new_rental)
     puts
-    puts "Rental #{new_rental.person.id} created successfully."
+    puts "Rental for #{new_rental.person.id} created successfully."
     puts
     puts
   end
@@ -114,10 +115,13 @@ class App
 
   def list_rentals
     puts 'Enter person id:'
+    list_people
     person_id = gets.chomp
     puts 'Rentals:'
     @rentals.each do |rental|
+      if rental.person.id == person_id
       puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author} rented by #{rental.person.name}"
+      end
     end
     puts
   end
