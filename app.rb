@@ -28,14 +28,16 @@ class App
       print 'Specialisation:  '
       gets.chomp
     when '2'
-      print 'Has parent permission [Y/N]:'
-      case gets.chomp
-      when 'Y'
-        true
-      when 'N'
-        false
-      else
-        puts 'Invalid person parent permission. Please try again.'
+      loop do
+        print 'Has parent permission [y/n]:'
+        case gets.chomp
+        when 'y'
+          return true
+        when 'n'
+          return false
+        else
+          puts 'Invalid person parent permission. Please try again.'
+        end
       end
     end
   end
@@ -48,9 +50,12 @@ class App
       type = gets.chomp
       break if %w[1 2].include?(type)
     end
-    # if type != 1 || type != 2
-    print 'Age:  '
-    age = gets.chomp
+    age = ''
+    loop do
+      print 'Age:  '
+      age = gets.chomp
+      break if age.to_i.positive? && age.to_i < 100 && age.to_i.to_s == age
+    end
     print 'Name:  '
     name = gets.chomp
     specialisation, parent_permission = teacher_or_student(type)
