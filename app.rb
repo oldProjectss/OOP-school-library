@@ -42,9 +42,13 @@ class App
 
   # Create a person (teacher or student, not a plain Person).
   def create_person
-    puts 'Do you want to create a teacher (1) or a student (2)? [Input 1 or 2]:'
-    type = gets.chomp
-    puts 'Invalid input. Please try again.' if type != '1' || type != '2'
+    type = ''
+    loop do
+      puts 'Do you want to create a teacher (1) or a student (2)? [Input 1 or 2]:'
+      type = gets.chomp
+      break if %w[1 2].include?(type)
+    end
+    # if type != 1 || type != 2
     print 'Age:  '
     age = gets.chomp
     print 'Name:  '
