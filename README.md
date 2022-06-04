@@ -6,6 +6,29 @@
 
 To start using this software you need to have Ruby installed in your machine
 
+Then clone this repo:
+
+```
+-$ git clone https://github.com/Ismailco/OOP-school-library
+```
+
+```
+-$ cd OOP-school-library
+```
+
+To run the script, in your terminal:
+
+```
+-$ Ruby main.rb
+```
+
+Choose an option:
+
+![](./preview.png)
+
+To close the programe choose 7 then press ```Enter```
+
+
 ## Authors
 
 👤 **Ismail courr**
