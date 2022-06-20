@@ -28,8 +28,6 @@ class App
   include Rentals
   include BookModule
 
-
-
   def list_books
     @books.each_with_index { |book, index| puts "#{index + 1}) Title: \"#{book.title}\", Author: #{book.author}" }
     puts
