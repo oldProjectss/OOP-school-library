@@ -13,6 +13,7 @@ require './student'
 require './teacher'
 require './rentals_handler'
 require './person_handler'
+require './book_handler'
 
 class App
   attr_reader :books, :people, :rentals
@@ -25,21 +26,9 @@ class App
 
   include PersonModule
   include Rentals
+  include BookModule
 
-  # Create a book.
-  def create_book
-    print 'Title:  '
-    title = gets.chomp
-    print 'Author:  '
-    author = gets.chomp
-    new_book = Book.new(title, author)
-    @books.push(new_book)
-    puts
-    # Puts message when book is created successfully
-    puts "Book #{new_book.title} created successfully."
-    puts
-    puts
-  end
+
 
   def list_books
     @books.each_with_index { |book, index| puts "#{index + 1}) Title: \"#{book.title}\", Author: #{book.author}" }
