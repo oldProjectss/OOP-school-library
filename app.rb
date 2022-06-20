@@ -11,6 +11,9 @@ require './rental'
 require './classroom'
 require './student'
 require './teacher'
+require './rentals_handler'
+require './person_handler'
+require './book_handler'
 
 class App
   attr_reader :books, :people, :rentals
@@ -21,92 +24,9 @@ class App
     @rentals = []
   end
 
-  # is teacher or student
-  def teacher_or_student(type)
-    case type
-    when '1'
-      print 'Specialisation:  '
-      gets.chomp
-    when '2'
-      loop do
-        print 'Has parent permission [y/n]:'
-        case gets.chomp
-        when 'y'
-          return true
-        when 'n'
-          return false
-        else
-          puts 'Invalid person parent permission. Please try again.'
-        end
-      end
-    end
-  end
-
-  # Create a person (teacher or student, not a plain Person).
-  def create_person
-    type = ''
-    loop do
-      puts 'Do you want to create a teacher (1) or a student (2)? [Input 1 or 2]:'
-      type = gets.chomp
-      break if %w[1 2].include?(type)
-    end
-    age = ''
-    loop do
-      print 'Age:  '
-      age = gets.chomp
-      break if age.to_i.positive? && age.to_i < 100 && age.to_i.to_s == age
-    end
-    print 'Name:  '
-    name = gets.chomp
-    specialisation, parent_permission = teacher_or_student(type)
-
-    case type
-    when '1'
-      new_person = Teacher.new(specialisation, name, age)
-    when '2'
-      new_person = Student.new(age, name, parent_permission)
-    end
-    @people.push(new_person)
-    puts
-    # Puts message when person is created successfully
-    puts "Person #{new_person.name} created successfully."
-    puts
-  end
-
-  # Create a book.
-  def create_book
-    print 'Title:  '
-    title = gets.chomp
-    print 'Author:  '
-    author = gets.chomp
-    new_book = Book.new(title, author)
-    @books.push(new_book)
-    puts
-    # Puts message when book is created successfully
-    puts "Book #{new_book.title} created successfully."
-    puts
-    puts
-  end
-
-  def create_rental
-    puts 'Select a book from the following list by number:'
-    list_books
-    book_id = gets.chomp
-    book = @books[book_id.to_i - 1]
-    puts 'Select a person from the following list by number:'
-    list_people
-    person_id = gets.chomp
-    person = @people[person_id.to_i - 1]
-    print 'Date:  '
-    date = gets.chomp
-    new_rental = Rental.new(book, person, date)
-    new_rental.person.id = person_id
-    @rentals.push(new_rental)
-    puts
-    puts "Rental for #{new_rental.person.id} created successfully."
-    puts
-    puts
-  end
+  include PersonModule
+  include Rentals
+  include BookModule
 
   def list_books
     @books.each_with_index { |book, index| puts "#{index + 1}) Title: \"#{book.title}\", Author: #{book.author}" }
