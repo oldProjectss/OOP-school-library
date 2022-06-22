@@ -1,4 +1,6 @@
 require './app'
+require './file_save'
+require 'json'
 
 def menu_items
   puts '1 - List all books'
@@ -22,6 +24,7 @@ def self.part_one(app, option)
 end
 
 def self.part_two(app, option)
+  include SaveToFile
   case option
   when 4
     app.create_book
@@ -29,13 +32,21 @@ def self.part_two(app, option)
     app.create_rental
   when 6
     app.list_rentals
+  when 7
+    app.write_to_file
   end
 end
 
+def import_save_module
+  include SaveToFile
+end
+
 def input
+  import_save_module
   app = App.new
   option = ''
-  while option != 7
+  app.read_from_file
+  loop do
     menu_items
     option = gets.chomp.to_i
     part_one(app, option)
