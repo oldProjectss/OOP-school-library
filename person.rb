@@ -3,8 +3,6 @@ require './rental'
 
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person < Nameable
-  
-
   # attr_reader
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -17,6 +15,7 @@ class Person < Nameable
   end
   attr_accessor :name, :age, :rental, :id, :parent_permission
   # Create Private method
+
   private
 
   # I renamed this method so it pass the linters check

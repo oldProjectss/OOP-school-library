@@ -37,7 +37,7 @@ def self.part_two(app, option)
   end
 end
 
-def import_save_module
+def self.import_save_module
   include SaveToFile
 end
 
