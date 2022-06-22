@@ -3,7 +3,7 @@ require './rental'
 
 # Create Person class with constructor using parameters => name, age, and parent_permission
 class Person < Nameable
-  attr_accessor :name, :age, :rental, :id, :parent_permission
+  
 
   # attr_reader
 
@@ -15,7 +15,7 @@ class Person < Nameable
     @rental = []
     super()
   end
-
+  attr_accessor :name, :age, :rental, :id, :parent_permission
   # Create Private method
   private
 
