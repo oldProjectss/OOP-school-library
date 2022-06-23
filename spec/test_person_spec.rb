@@ -2,7 +2,7 @@ require_relative '../person'
 
 describe Person do
   random_age = rand(18..60)
-  let(:person) { Person.new( random_age,'Ifza') }
+  let(:person) { Person.new(random_age, 'Ifza') }
 
   describe 'Test creating new person' do
     it 'test retriving person name' do
