@@ -20,11 +20,15 @@ module SaveToFile
     exit
   end
 
+  def accept_hash=(books)
+    books.each { |_book, prop| @books.push(Book.new(prop['title'], prop['author'])) }
+  end
+
   def read_from_file
     if File.exist?('./data/books.json')
       books = File.read('./data/books.json')
       books = JSON.parse(books)
-      books.each { |_book, prop| @books.push(Book.new(prop['title'], prop['author'])) }
+      accept_hash(books)
     end
     return unless File.exist?('./data/people.json')
 
