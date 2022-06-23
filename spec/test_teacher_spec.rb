@@ -1,6 +1,6 @@
 require_relative '../teacher'
 
-describe Book do
+describe Teacher do
   random_age = rand(18..60)
   let(:teacher) { Teacher.new('Tech', 'ismail', random_age) }
 

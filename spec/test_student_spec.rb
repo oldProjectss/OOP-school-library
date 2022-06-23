@@ -1,6 +1,6 @@
 require_relative '../student'
 
-describe Book do
+describe Student do
   let(:student) { Student.new(true, 'david', 21) }
 
   describe 'Test creating new student' do
