@@ -19,9 +19,11 @@ module SaveToFile
     File.write('./data/rentals.json', JSON.generate(rentals), mode: 'w')
     exit
   end
+
   def accept_hash=(books)
     books.each { |_book, prop| @books.push(Book.new(prop['title'], prop['author'])) }
-  end 
+  end
+
   def read_from_file
     if File.exist?('./data/books.json')
       books = File.read('./data/books.json')
