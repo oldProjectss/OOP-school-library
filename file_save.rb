@@ -3,16 +3,16 @@ module SaveToFile
     books = {}
     people = {}
     rentals = {}
-    @books.each { |book| books[book.title] = book.author }
+    @books.each { |book| books[book.class] = { 'title' => book.title, 'author' => book.author } }
     @people.each do |person|
-      people[person] = if person.instance_of?(Teacher)
-                         { 'name' => person.name, 'specialization' => person.specialization, 'age' => person.age,
-                           'parent_permission' => person.parent_permission, 'id' => person.id }
-                       else
-                         { 'name' => person.name, 'age' => person.age,
-                           'parent_permission' => person.parent_permission, 'id' => person.id }
+      people[person.class] = if person.instance_of?(Teacher)
+                               { 'name' => person.name, 'specialization' => person.specialization, 'age' => person.age,
+                                 'parent_permission' => person.parent_permission, 'id' => person.id }
+                             else
+                               { 'name' => person.name, 'age' => person.age,
+                                 'parent_permission' => person.parent_permission, 'id' => person.id }
 
-                       end
+                             end
     end
     # @rentals.each { |rental| rentals[rental.book.title] = {'date' => rental.date, 'person' => rental.person.name }}
     File.write('./data/books.json', JSON.generate(books), mode: 'w')
@@ -25,7 +25,7 @@ module SaveToFile
     if File.exist?('./data/books.json')
       books = File.read('./data/books.json')
       books = JSON.parse(books)
-      books.each { |title, author| @books.push(Book.new(title, author)) }
+      books.each { |_book, prop| @books.push(Book.new(prop['title'], prop['author'])) }
     end
     if File.exist?('./data/people.json')
       people = File.read('./data/people.json')
