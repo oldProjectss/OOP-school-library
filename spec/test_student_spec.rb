@@ -4,7 +4,7 @@ describe Book do
   let(:student) { Student.new(true, 'david', 21) }
 
   describe 'Test creating new student' do
-    it 'test adding retriving student name' do
+    it 'test retriving student name' do
       expect(student.name).to eq('david')
     end
     it 'test retriving student permissions' do
