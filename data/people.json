@@ -1,1 +1,1 @@
-{"Teacher":{"name":"ismail","specialization":"IT","age":"24","parent_permission":true,"id":49},"Student":{"name":"jack","age":true,"parent_permission":true,"id":"2"}}
+[{"name":"ismail","specialization":"tech","age":"25","parent_permission":true,"id":30},{"name":"jack","age":"12","parent_permission":true,"id":1}]

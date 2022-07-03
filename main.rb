@@ -24,7 +24,6 @@ def self.part_one(app, option)
 end
 
 def self.part_two(app, option)
-  include SaveToFile
   case option
   when 4
     app.create_book
@@ -37,12 +36,7 @@ def self.part_two(app, option)
   end
 end
 
-def self.import_save_module
-  include SaveToFile
-end
-
 def input
-  import_save_module
   app = App.new
   option = ''
   app.read_from_file

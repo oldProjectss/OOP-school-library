@@ -42,7 +42,7 @@ module PersonModule
     when '1'
       new_person = Teacher.new(specialisation, name, age)
     when '2'
-      new_person = Student.new(age, name, parent_permission)
+      new_person = Student.new(name, age, parent_permission)
     end
     @people.push(new_person)
     puts
