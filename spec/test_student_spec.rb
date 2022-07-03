@@ -1,7 +1,7 @@
 require_relative '../student'
 
 describe Student do
-  let(:student) { Student.new(true, 'david', 21) }
+  let(:student) { Student.new('david', 21, true) }
 
   describe 'Test creating new student' do
     it 'test retriving student name' do
