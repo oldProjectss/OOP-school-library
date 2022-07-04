@@ -32,14 +32,19 @@ def self.part_two(app, option)
   when 6
     app.list_rentals
   when 7
-    app.write_to_file
+    app.save_books
+    app.save_people
+    app.save_rentals
+    exit()
   end
 end
 
 def input
   app = App.new
   option = ''
-  app.read_from_file
+  app.read_book_data
+  app.read_person_data
+  app.read_rental_data
   loop do
     menu_items
     option = gets.chomp.to_i
