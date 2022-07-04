@@ -23,13 +23,12 @@ def write_to_file
         end
     people.push(p)
   end
-
   @rentals.each do |rental|
-    r = [
-      book: { 'title' => rental.book.title, 'author' => rental.book.author },
-      person: { 'name' => rental.person.name, 'age' => rental.person.age, 'id' => rental.person.id },
-      date: { 'date' => rental.date }
-    ]
+    r = {
+      'book' => { 'title' => rental.book.title, 'author' => rental.book.author },
+      'person' => { 'name' => rental.person.name, 'age' => rental.person.age, 'id' => rental.person.id },
+      'date' => rental.date
+    }
     rentals.push(r)
   end
   File.write('./data/books.json', JSON.generate(books), mode: 'w')
@@ -61,11 +60,11 @@ def read_from_file
 
   rentals = File.read('./data/rentals.json')
   rentals = JSON.parse(rentals)
-  rentals.each_with_index do |rental, i|
-    b = Book.new(rental[i]['book']['title'], rental[i]['book']['author'])
-    pr = Person.new(rental[i]['person']['age'], rental[i]['person']['name'])
-    pr.id = rental[i]['person']['id']
-    date = rental[i]['date']['date']
+  rentals.each do |rental|
+    b = Book.new(rental['book']['title'], rental['book']['author'])
+    pr = Person.new(rental['person']['age'], rental['person']['name'])
+    pr.id = rental['person']['id']
+    date = rental['date']
     @rentals.push(Rental.new(b, pr, date))
   end
 end
