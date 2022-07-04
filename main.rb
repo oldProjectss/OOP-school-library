@@ -35,7 +35,7 @@ def self.part_two(app, option)
     app.save_books
     app.save_people
     app.save_rentals
-    exit()
+    exit
   end
 end
 

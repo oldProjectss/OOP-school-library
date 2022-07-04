@@ -81,35 +81,3 @@ def read_rental_data
     @rentals.push(Rental.new(b, pr, date))
   end
 end
-
-# def read_from_file
-#   if File.exist?('./data/books.json')
-#     books = File.read('./data/books.json')
-#     books = JSON.parse(books)
-#     books.each { |prop| @books.push(Book.new(prop['title'], prop['author'])) }
-#   end
-
-#   return unless File.exist?('./data/people.json')
-
-#   people = File.read('./data/people.json')
-#   people = JSON.parse(people)
-#   people.each do |prop|
-#     if prop['specialization']
-#       @people.push(Teacher.new(prop['specialization'], prop['name'], prop['age']))
-#     else
-#       @people.push(Student.new(prop['name'], prop['age'], prop['parent_permission']))
-#     end
-#   end
-
-#   return unless File.exist?('./data/rentals.json')
-
-#   rentals = File.read('./data/rentals.json')
-#   rentals = JSON.parse(rentals)
-#   rentals.each do |rental|
-#     b = Book.new(rental['book']['title'], rental['book']['author'])
-#     pr = Person.new(rental['person']['age'], rental['person']['name'])
-#     pr.id = rental['person']['id']
-#     date = rental['date']
-#     @rentals.push(Rental.new(b, pr, date))
-#   end
-# end
